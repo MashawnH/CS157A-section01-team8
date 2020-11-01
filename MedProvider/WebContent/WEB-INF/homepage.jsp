@@ -30,10 +30,10 @@
 		<img src="images/logo.png" alt="Logo">
 	</div>
 
-	<h1 style="text-align: center">Please choose your type of user:</h1>
+	<h1 style="text-align: left">Please choose your type of user:</h1>
 	
 
-	<div style="text-align: center;">
+	<div style="text-align: left;">
 		<form action="/action_page.php">
 		<span class="sortOptions">
 			<input type="radio" id="patient" name="patient" value="patient">
