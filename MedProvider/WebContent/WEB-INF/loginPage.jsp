@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="UTF-8"%>
-    <%@ page import="java.sql.*"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 
@@ -52,14 +51,19 @@
 	}
 	
 	.logo {
-		display: block;
+		position: relative;
+		z-index: 0;
+		background: none;
+		width: 90%;
+		height: 100%;
+		margin-left: 40px;
 	}
 	.logo .container{
+		z-index: 0;
+		margin-left: auto;
+		margin-right: auto;
 		text-align: center;
-		dsiplay: inline-block;
-	  	margin-left: auto;
-	  	margin-right: auto;
-	  	width: 50%;
+		width: 180px
 	}
 	
 	.logo .container img {
@@ -112,54 +116,86 @@
 		border: 2px solid #cd5c5c;
 	}
 	
+	.form-container {
+		display: block;
+	/* 	text-align: center; */
+	}
+	
+	form {
+	  dsiplay: inline-block;
+	  margin-left: auto;
+	  margin-right: auto;
+	  width: 50%;
+	}
+
+	/* Full-width inputs */
+	input[type=text], input[type=password] {
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid #ccc;
+	  box-sizing: border-box;
+	}
+	
+	/* Set a style for all buttons */
+	button {
+	  background-color: #cd5c5c;
+	  color: white;
+	  padding: 14px 20px;
+	  margin: 8px 0;
+	  border: none;
+	  cursor: pointer;
+	  width: 100%;
+	}
+	
+	/* Add a hover effect for buttons */
+	button:hover {
+	  opacity: 0.8;
+	}
 	
 	
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Patient Homepage</title>
+<title>Login Page</title>
 </head>
 <body>
 
 	<div class="row">
 		<div class="column left"></div>
 		<div class="column middle">
-			<div class="middle-header">
-				<div class="logout" style="float:right">
-					<div id="logout-btn" style="align:center;">
-						<a href="http://localhost:8080/MedProvider/loginPage.jsp">Log out</a>
+			<div class="form-container">
+				<!-- Will probably need to change this to login.js or something for data processing -->
+				<form action="patientHome.jsp" method="post">
+					<div class="login-header">	
+						<div class = "logo">
+							<div class="container">
+								<img src="images/logo.png" alt="Logo">
+								<p>
+									<b>
+										<i>MedProvider</i>
+									</b>
+								</p>
+							</div>
+						</div>
 					</div>
-				</div>
-				
-				<div class = "logo">
-					<div class="container">
-						<img src="images/logo.png" alt="Logo">
-						<p>
-							<b>
-								<i>MedProvider</i>
-							</b>
-						</p>
+					<div class="login-body">
+						<label for="email"><b>Email</b></label>
+						<input type ="text" placeholder="Enter Email" name="email" required>
+						<label for="psw"><b>Password</b></label>
+						<input type="password" placeholder="Enter Password" name="psw" required>
+						<button class="login" type="submit">Login</button>
 					</div>
-				</div>
-			</div>
-			<div class="middle-body">
-				<ul class="body-btns">
-					<li>
-						<a href=#>Make an Appointment</a>
-					</li>
-					<li>
-						<a href=#>View Your Appointments</a>
-					</li>
-					<li>
-						<a href=#>Contact a Physician</a>
-					</li>
-				</ul>
+				</form>
+				<form action="homepage.jsp" method="post">
+					<button class="signup" type="submit">Create Account</button>
+				</form>
 			</div>
 		</div>
 		
 		
 		<div class="column right"></div>
 	</div>
-
 </body>
 </html>
