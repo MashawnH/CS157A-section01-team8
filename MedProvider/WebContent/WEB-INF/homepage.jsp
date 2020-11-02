@@ -36,11 +36,11 @@
 	<div style="text-align: left;">
 		<form action="/action_page.php">
 		<span class="sortOptions">
-			<input type="radio" id="patient" name="patient" value="patient">
-			<label for="patient">Patient</label><br> <input type="radio"
-				id="physician" name="physician" value="physician"> <label
+			<input type="radio" id="patients" name="radAnswer" value="patients">
+			<label for="patients">Patient</label><br> <input type="radio"
+				id="physician" name="radAnswer" value="physician"> <label
 				for="physician">Physician</label><br> <input type="radio"
-				id="administrator" name="administrator" value="administrator">
+				id="administrator" name="radAnswer" value="administrator">
 			<label for="administrator">Administrator</label>
 			</span>
 		</form>
