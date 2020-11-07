@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 
@@ -103,17 +104,21 @@
 	
 </style>
 <head>
+
 <meta charset="ISO-8859-1">
+
 <title>Login Page</title>
 </head>
-<body>
 
+
+<body>
 	<div class="row">
 		<div class="column left"></div>
 		<div class="column middle">
 			<div class="form-container">
 				<!-- Will probably need to change this to login.js or something for data processing -->
-				<form action="patientHome.jsp" method="post">
+				<!-- <form id="login-form" action="loginPage.js" method="post"> -->
+				<form id="login-form" action="loginValidation.jsp" method="post">
 					<div class="login-header">	
 						<div class = "logo">
 							<div class="container">
@@ -131,10 +136,10 @@
 						<input type ="text" placeholder="Enter Email" name="email" required>
 						<label for="psw"><b>Password</b></label>
 						<input type="password" placeholder="Enter Password" name="psw" required>
-						<button class="login" type="submit">Login</button>
+						<button id="login" type="submit">Login</button>
 					</div>
 				</form>
-				<form action="homepage.jsp" method="post">
+			<form action="homepage.jsp" method="post">
 					<button class="signup" type="submit">Create Account</button>
 				</form>
 			</div>
