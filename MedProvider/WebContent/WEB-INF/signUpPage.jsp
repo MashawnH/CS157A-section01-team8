@@ -76,12 +76,11 @@ input[type=text], input[type=password] {
 							placeholder="Enter Email" name="email" required> 
 						<label for="psw"><b>Password</b></label> <input type="password"
 							placeholder="Enter Password" name="psw" required>
-						<button id="signup" type="submit">Sign Up</button>
 					</div>
 				</form>
 
 				<form action="signUpValidation.jsp" method="post">
-					<button class="signup" type="submit">Create Account</button>
+					<button class="signup" type="submit">Sign Up</button>
 				</form>
 
 
