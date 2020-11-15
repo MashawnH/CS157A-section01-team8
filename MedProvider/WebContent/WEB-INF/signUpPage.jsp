@@ -60,20 +60,14 @@ input[type=text], input[type=password] {
 
 	<div style="text-align: left;">
 		<form action="/action_page.php">
-			<span class="sortOptions"> <input type="radio" id="patients"
-				name="radAnswer" value="patients"> <label for="patients">Patient</label><br>
-				<input type="radio" id="physician" name="radAnswer"
-				value="physician"> <label for="physician">Physician</label><br>
-				<input type="radio" id="administrator" name="radAnswer"
-				value="administrator"> <label for="administrator">Administrator</label>
+			<span class="sortOptions"> 
+			<input type="radio" id="patients" name="radAnswer" value="patients"> <label for="patients">Patient</label><br>
+			<input type="radio" id="physician" name="radAnswer" value="physician"> <label for="physician">Physician</label><br>
+			<input type="radio" id="administrator" name="radAnswer" value="administrator"> <label for="administrator">Administrator</label>
 			</span>
 		</form>
 	</div>
 
-
-
-
-	
 				<form id="signUp-form" action="signUpValidation.jsp" method="post">
 					<div class="login-body">
 						<label for="username"><b>User Name</b></label> <input type="text"
