@@ -66,9 +66,10 @@ input[type=text], input[type=password] {
 		<div class="login-body">
 			<div style="text-align: left;">
 				<span class="sortOptions"> 
-				<input type="radio" id="patient" name="radAnswer" value="patient"> Patient  <br>
-					<input type="radio" id="physician" name="radAnswer" value="physician"> Physician<br>
-					<input type="radio" id="administrator" name="radAnswer" value="administrator"> Administrator
+				<input type="radio" id="patient" name="radAnswer" value="patient"><label> Patient </label> <br>
+				<input type="radio" id="physician" name="radAnswer" value="physician"> <label> Physician</label> <br>
+				<input type="radio" id="administrator" name="radAnswer" value="administrator"> <label>Administrator</label> <br>
+				<br>
 				</span>
 			</div>
 			<label for="username"><b>User Name</b></label> <input type="text"

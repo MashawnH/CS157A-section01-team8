@@ -76,6 +76,7 @@ try {
 	     		int number =  r.nextInt((99999 - 10000) + 1) + 10000;
 	     
 				int i = st.executeUpdate("INSERT INTO patients(patient_id,emailpatient)VALUES('PA"+ number + "','" + email + "')");%>
+				window.location = "loginPage.jsp";
 			}
 			else if (chosen = 'physician')
 			{
@@ -88,7 +89,7 @@ try {
 		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
 		     
 					i = st.executeUpdate("INSERT INTO physicians(physician_id,emailphysician)VALUES('PH"+ number + "','" + email + "')");%>
-					
+					window.location = "loginPage.jsp";
 			}
 			else
 			{
@@ -101,6 +102,7 @@ try {
 		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
 		     
 					i = st.executeUpdate("INSERT INTO administrators(admin_id,emailadmin)VALUES('AD"+ number + "','" + email + "')");%>
+					window.location = "loginPage.jsp";
 			}
 	}	
 	
