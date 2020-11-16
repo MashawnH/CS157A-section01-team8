@@ -58,30 +58,31 @@ input[type=text], input[type=password] {
 	<h1 style="text-align: left">Please choose your type of user:</h1>
 
 
-	<div style="text-align: left;">
-		<form action="/action_page.php">
-			<span class="sortOptions"> 
-			<input type="radio" id="patients" name="radAnswer" value="patients"> <label for="patients">Patient</label><br>
-			<input type="radio" id="physician" name="radAnswer" value="physician"> <label for="physician">Physician</label><br>
-			<input type="radio" id="administrator" name="radAnswer" value="administrator"> <label for="administrator">Administrator</label>
-			</span>
-		</form>
-	</div>
 
-				<form id="signUp-form" action="signUpValidation.jsp" method="post">
-					<div class="login-body">
-						<label for="username"><b>User Name</b></label> <input type="text"
-							placeholder="Enter User Name" name="username" required> 						
-						<label for="email"><b>Email</b></label> <input type="text"
-							placeholder="Enter Email" name="email" required> 
-						<label for="psw"><b>Password</b></label> <input type="password"
-							placeholder="Enter Password" name="psw" required>
-					</div>
-				</form>
 
-				<form action="signUpValidation.jsp" method="post">
-					<button class="signup" type="submit">Sign Up</button>
-				</form>
+	<form id="signUp-form" action="signUpValidation.jsp" method="post">
+
+
+		<div class="login-body">
+			<div style="text-align: left;">
+				<span class="sortOptions"> 
+				<input type="radio" id="patient" name="radAnswer" value="patient"> Patient  <br>
+					<input type="radio" id="physician" name="radAnswer" value="physician"> Physician<br>
+					<input type="radio" id="administrator" name="radAnswer" value="administrator"> Administrator
+				</span>
+			</div>
+			<label for="username"><b>User Name</b></label> <input type="text"
+				placeholder="Enter User Name" name="username" required> <label
+				for="email"><b>Email</b></label> <input type="text"
+				placeholder="Enter Email" name="email" required> <label
+				for="psw"><b>Password</b></label> <input type="password"
+				placeholder="Enter Password" name="psw" required>
+				
+				
+		</div>
+		<button class="signup" type="submit">Sign Up</button>
+	</form>
+
 
 
 
