@@ -69,23 +69,38 @@ try {
 			{
 				console.log('Hello patient');
 				<%Class.forName("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
-		Statement st = conn.createStatement();
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
+				Statement st = conn.createStatement();
 		
-		
-		
-		 Random r = new Random();
-	     int number =  r.nextInt((99999 - 10000) + 1) + 10000;
+		 		Random r = new Random();
+	     		int number =  r.nextInt((99999 - 10000) + 1) + 10000;
 	     
-		int i = st.executeUpdate("INSERT INTO patients(patient_id,emailpatient)VALUES('PA"+ number + "','" + email + "')");%>
+				int i = st.executeUpdate("INSERT INTO patients(patient_id,emailpatient)VALUES('PA"+ number + "','" + email + "')");%>
 			}
 			else if (chosen = 'physician')
 			{
-				console.log('Hello physician');
+					console.log('Hello physician');
+					<%Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
+					st = conn.createStatement();
+			
+			 		r = new Random();
+		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
+		     
+					i = st.executeUpdate("INSERT INTO physicians(physician_id,emailphysician)VALUES('PH"+ number + "','" + email + "')");%>
+					
 			}
 			else
 			{
-				console.log('Hello admin');
+					console.log('Hello admin');
+					<%Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
+					st = conn.createStatement();
+			
+			 		r = new Random();
+		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
+		     
+					i = st.executeUpdate("INSERT INTO administrators(admin_id,emailadmin)VALUES('AD"+ number + "','" + email + "')");%>
 			}
 	}	
 	
