@@ -3,47 +3,8 @@
 <%@ page import="java.sql.*"%>
 <html>
 
-<style>
-.aligncenter {
-	text-align: center;
-}
-
-.sortOptions>label {
-	font-size: 30px;
-}
-
-.sortOptions>input[type=radio] {
-	width: 30px;
-	height: 30px;
-}
-
-.column {
-	float: left;
-	height: 900px;
-}
-
-.left, .right {
-	width: 25%;
-	background-color: #d3d3d3;
-}
-
-.middle {
-	background-color: #bbb;
-	width: 50%;
-}
-
-/* Full-width inputs */
-input[type=text], input[type=password] {
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-}
-</style>
-
 <head>
+<link rel="stylesheet" href="styles.css">
 <title>MedProvider</title>
 </head>
 <body>
