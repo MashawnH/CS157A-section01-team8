@@ -17,7 +17,7 @@
 			<div class="middle-header">
 				<div class="logout" style="float:right">
 					<div id="logout-btn" style="align:center;">
-						<a href="http://localhost:8080/MedProvider/loginPage.jsp">Log out</a>
+						<a href="loginPage.jsp">Log out</a>
 					</div>
 				</div>
 				
@@ -35,15 +35,54 @@
 			<div class="middle-body">
 				<ul class="body-btns">
 					<li>
-						<a href=#>Make an Appointment</a>
+						<button id="make-appoint-btn" onClick="initAppointmentForm()">Make an Appointment</button>
 					</li>
 					<li>
-						<a href=#>View Your Appointments</a>
+						<button id="view-appoint-btn" onClick="initAppointmentForm()">View Your Appointments</button>
 					</li>
 					<li>
-						<a href=#>Contact a Physician</a>
+						<button id="contact-physician-btn" onClick="initAppointmentForm()">Contact a Physician</button>
 					</li>
 				</ul>
+				<div class="form-container">
+					<form id="make-appoint-form" action="appointmentValidation.jsp" method="post" style="display: none">
+						<div class="make-appoint-body">
+							<label for="email"><b>Physician's Email</b></label>
+							<input id="physEmail" type ="text" placeholder="Enter Email" name="email" required>
+							<label for="appoint-date"><b>Date&Time</b></label>
+							<input id="datePicker" type="date" name="appoint_date" required>
+							<input id="timePicker" type="time" name="appoint_time" 
+							min="8:00" max ="18:00" step="60" required>
+							<button id=submit-btn type="submit">Submit</button>
+
+							<script type="text/javascript">
+								function initAppointmentForm() {
+									var formVis = document.getElementById('make-appoint-form');
+									if (formVis.style.display === "none") {
+										formVis.style.display = "block";
+										var today = new Date();
+										var year = today.getFullYear();
+										var month = String(today.getMonth() + 1).padStart(2, '0'); 
+										var day = String(today.getDate()).padStart(2, '0');
+										document.getElementById('datePicker').min = year +"-"+ month +"-"+ day;
+									} else {
+										formVis.style.display = "none";
+									}
+									
+								}
+								
+								function submitAppointment() {
+									var physEmail = document.getElementById('physEmail').value;
+									var date = document.getElementById('datePicker').value;
+									var time = document.getElementById('timePicker').value;
+									console.log(physEmail);
+									console.log(date);
+									console.log(time);
+								}
+							</script>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 		
