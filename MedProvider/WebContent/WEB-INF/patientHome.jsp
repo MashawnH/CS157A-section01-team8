@@ -95,13 +95,12 @@
 
 					<%-- message form --%>
 					<div class="form-container">
-						<form id="make-message-form" action="messagevalidation.jsp"
-							method="post" style="display: none">
+						<form id="make-message-form" action="patientMessageValidation.jsp" method="post" style="display: none">
 							<div class="make-message-form">
-								<label for="email"><b>Physician's Email</b></label> <input
-									id="physEmail" type="text" placeholder="Enter Email"
-									name="email" required> <label for="message"><b>Message</b></label>
-								<textarea id="messagefrompatient" rows="10" cols="50"
+								<label for="email"><b>Physician's Email</b></label>
+								<input id="physEmail" type="text" placeholder="Enter Email" name="email" required> 
+								<label for="message"><b>Message</b></label>
+								<textarea id="messagefrompatient" rows="10" cols="60"
 									placeholder="Enter Message" name="message" required></textarea>
 								<button id=submit-btn type="submit">Submit</button>
 

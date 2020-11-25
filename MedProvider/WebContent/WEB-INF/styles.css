@@ -100,7 +100,7 @@ input[type=text], input[type=password] {
 	box-sizing: border-box;
 }
 /* Trying to style the textbox for message but doesnt seem to work.   */
-input[type=textarea]
+textarea
 {
 	padding: 12px 20px;
 	margin: 8px 0;
