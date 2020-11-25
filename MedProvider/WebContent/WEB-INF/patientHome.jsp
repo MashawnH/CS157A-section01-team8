@@ -45,7 +45,13 @@
 						<button id="contact-physician-btn" onClick="initMessageForm()">Contact
 							a Physician</button>
 					</li>
+					
+					<li>
+						<button id="view-messages-btn" onClick="patientViewMessages()">View Messages</button>
+					</li>
+						
 				</ul>
+				
 				<div class="form-container">
 					<form id="make-appoint-form" action="appointmentValidation.jsp"
 						method="post" style="display: none">
