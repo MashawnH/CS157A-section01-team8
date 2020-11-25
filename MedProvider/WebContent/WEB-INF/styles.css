@@ -99,6 +99,18 @@ input[type=text], input[type=password] {
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 }
+/* Trying to style the textbox for message but doesnt seem to work.   */
+input[type=textarea]
+{
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	font-size: 16px;
+	font-family: 'Source Sans Pro', sans-serif;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
 
 /* Set a style for all buttons in form-containers */
 .form-container button {
@@ -171,3 +183,4 @@ button:hover {
 	line-height: 30px;
 	float: left;
 }
+
