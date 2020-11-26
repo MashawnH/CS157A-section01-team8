@@ -40,6 +40,10 @@
 <script type="text/javascript">
 	function createAppointment(){
 		var physFound = "<%= aPhysician %>";
+		var phys = "<%= physEmail %>";
+		var user = "<%= userEmail %>";
+		var date = "<%= date %>";
+		console.log(date)
 		if(physFound>0){
 			<%
 			if(aPhysician>0){	
@@ -50,7 +54,11 @@
 				    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT",user, password);
 				    Statement stmt = con.createStatement();
 				    int i = stmt.executeUpdate(
-							"INSERT INTO appointment(Emailpatient_appoint, Emailphysician_appoint, appointment_date, appointment_time)VALUES('" + userEmail + "','" + physEmail + "','" + date + "','" + time +"')");
+							"INSERT INTO appointment (appointment_date, appointment_time) VALUES('" + date + "','" + time +"')");
+				    i = stmt.executeUpdate(
+							"INSERT INTO appointment_patient VALUES('" + userEmail + "',(SELECT last_insert_id()))");
+				    i = stmt.executeUpdate(
+							"INSERT INTO appointment_physician VALUES('" + physEmail + "',(SELECT last_insert_id()))");
 				    stmt.close();
 				    con.close();
 				} catch(SQLException e) { 
@@ -58,8 +66,9 @@
 				}
 			}
 			%>
-			alert("Appointment Created");
+			
 			window.location= "patientHome.jsp";
+			alert("Appointment Created");
 		}
 		else{
 			alert("Physician not found");

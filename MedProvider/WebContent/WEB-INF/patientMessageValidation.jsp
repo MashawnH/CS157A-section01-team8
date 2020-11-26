@@ -10,7 +10,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body onload="createAndShowMessages()">
+<body onload="createMessages()">
 </body>
 <%
 	String userEmail = (String)session.getAttribute("SES_USEREMAIL");
@@ -23,7 +23,7 @@
 	
 	String db = "medprovider";
 	String user = "root"; // assumes database name is the same as username
-	String password = "toor";                //"Cannucks123!";
+	String password = "Cannucks123!";
 	int aPhysician = -1;
 	try {
 	    
@@ -44,7 +44,7 @@
 %>
 
 <script type="text/javascript">
-	function createAndShowMessages(){
+	function createMessages(){
 		var physFound = "<%= aPhysician %>";
 		if(physFound>0){
 			<%
@@ -57,6 +57,10 @@
 				    Statement stmt = con.createStatement();
 				    int i = stmt.executeUpdate(
 							"INSERT INTO messages(content, date)VALUES('" + msgContent + "','" + date +"')");
+				    i = stmt.executeUpdate(
+							"INSERT INTO patients_msg VALUES('" + userEmail + "',(SELECT last_insert_id()))");
+				    i = stmt.executeUpdate(
+							"INSERT INTO physician_msg VALUES('" + physEmail + "',(SELECT last_insert_id()))");
 				    stmt.close();
 				    con.close();
 				} catch(SQLException e) { 

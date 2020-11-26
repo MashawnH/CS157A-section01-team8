@@ -18,7 +18,7 @@ session.setAttribute("SES_USEREMAIL", email);
 
 String db = "medprovider";
 String user = "root"; // assumes database name is the same as username
-String password = "toor";           //"Cannucks123!";
+String password = "Cannucks123!";
 int aUser = -1;
 int aPatient = -1;
 int aPhysician = -1;

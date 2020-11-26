@@ -32,26 +32,19 @@
 				</div>
 			</div>
 			<div class="middle-body">
-				<ul class="body-btns">
-					<li>
-						<button id="make-appoint-btn" onClick="initAppointmentForm()">Make
-							an Appointment</button>
-					</li>
-					<li>
-						<button id="view-appoint-btn" onClick="initAppointmentForm()">View
-							Your Appointments</button>
-					</li>
-					<li>
-						<button id="contact-physician-btn" onClick="initMessageForm()">Contact
-							a Physician</button>
-					</li>
-					
-					<li>
-						<button id="view-messages-btn" onClick="patientViewMessages()">View Messages</button>
-					</li>
-						
-				</ul>
-				
+				<div class="body-btns">
+					<button id="make-appoint-btn" onClick="initAppointmentForm()">Make
+						an Appointment</button>
+					<button id="view-appoint-btn" onClick="showAppointments()">View
+						Your Appointments</button>
+				</div>
+				<div class="body-btns">
+					<button id="contact-physician-btn" onClick="initMessageForm()">Contact
+						a Physician</button>
+					<button id="view-prescriptions-btn" onClick="showMessages()">View
+						Messages</button>
+				</div>
+
 				<div class="form-container">
 					<form id="make-appoint-form" action="appointmentValidation.jsp"
 						method="post" style="display: none">
@@ -65,10 +58,29 @@
 							<button id=submit-btn type="submit">Submit</button>
 
 							<script type="text/javascript">
+							function hideAll() {
+								var formVis = document
+								.getElementById('make-appoint-form');
+								var appVis = document
+								.getElementById('view_app_table');
+								var messagesVis = document
+								.getElementById('make-message-form');
+								var msgTableVis = document
+								.getElementById('view_msg_table');
+								
+								formVis.style.display = "none";
+								appVis.style.display = "none";
+								messagesVis.style.display = "none";
+								msgTableVis.style.display = "none";
+								
+								
+							}
 								function initAppointmentForm() {
+								
 									var formVis = document
 											.getElementById('make-appoint-form');
 									if (formVis.style.display === "none") {
+										hideAll();
 										formVis.style.display = "block";
 										var today = new Date();
 										var year = today.getFullYear();
@@ -111,10 +123,12 @@
 								<button id=submit-btn type="submit">Submit</button>
 
 								<script type="text/javascript">
+									
 									function initMessageForm() {
 										var formVis = document
 												.getElementById('make-message-form');
 										if (formVis.style.display === "none") {
+											hideAll();
 											formVis.style.display = "block";
 											var today = new Date();
 											var year = today.getFullYear();
@@ -128,17 +142,133 @@
 										}
 
 									}
+									
+									function showMessages() {
+									
+									var formVis = document
+												.getElementById('view_msg_table');
+										if (formVis.style.display === "none") {
+											hideAll();
+											formVis.style.display = "block";
+										} else {
+											formVis.style.display = "none";
+										}
+									}
+									
+									function showAppointments() {
+								
+									var formVis = document
+												.getElementById('view_app_table');
+										if (formVis.style.display === "none") {
+											hideAll();
+											formVis.style.display = "block";
+										} else {
+											formVis.style.display = "none";
+										}
+									}
 									function submitMessage() {
 										var physEmail = document
 												.getElementById('physEmail').value;
 										var message = document
 												.getElementById('messagefrompatient').value;
-										console.log(physEmail);
-										console.log(message);
 									}
 								</script>
 							</div>
 						</form>
+					</div>
+					<div id="view_msg_table" style="display: none">
+
+						<table class=fixed-table rules="all">
+							<tr>
+								<th>Physician Email</th>
+								<th>Message</th>
+								<th>Date</th>
+							</tr>
+							
+								
+								<%
+									String userEmail = (String)session.getAttribute("SES_USEREMAIL");
+									String db = "medprovider";
+									String user = "root"; // assumes database name is the same as username
+									String password = "Cannucks123!";
+									String test = "nothing changed";
+									try {
+
+										java.sql.Connection con;
+										Class.forName("com.mysql.cj.jdbc.Driver");
+										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
+										Statement stmt = con.createStatement();
+										ResultSet rs = stmt
+												.executeQuery("select physicianemail_msg, content, date from messages, physician_msg,"
+														+ "(select patients_msg_id from patients_msg where patientsemail_msg = '" + userEmail
+														+ "')Temp"
+														+ " where Temp.patients_msg_id = msg_id and Temp.patients_msg_id = physician_msg_id");
+
+										while (rs.next()) {
+								
+											%>
+											
+										<tr>
+											 <td><%=rs.getString(1) %></td>
+											 <td><%=rs.getString(2) %></td>
+											 <td><%=rs.getString(3) %></td>
+										</tr>
+										<%
+										}
+										rs.close();
+										stmt.close();
+										con.close();
+									} catch (SQLException e) {
+										out.println("SQLException caught: " + e.getMessage());
+									}
+								%>
+							
+						</table>
+					</div>
+					<div id="view_app_table" style="display: none">
+
+						<table class=fixed-table rules="all">
+							<tr>
+								<th>Physician Email</th>
+								<th>Date</th>
+								<th>Time</th>
+							</tr>
+							
+								
+								<%
+									try {
+
+										java.sql.Connection con;
+										Class.forName("com.mysql.cj.jdbc.Driver");
+										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
+										Statement stmt = con.createStatement();
+										ResultSet rs = stmt
+												.executeQuery("select physicianemail_app, appointment_date, appointment_time" 
+														+ " from appointment, appointment_physician,"
+														+ "(select patient_app_id from appointment_patient where patientemail_app = '" + userEmail
+														+ "')Temp"
+														+ " where Temp.patient_app_id = appointment_id and Temp.patient_app_id = physician_app_id");
+
+										while (rs.next()) {
+								
+											%>
+											
+										<tr>
+											 <td><%=rs.getString(1) %></td>
+											 <td><%=rs.getString(2) %></td>
+											 <td><%=rs.getString(3) %></td>
+										</tr>
+										<%
+										}
+										rs.close();
+										stmt.close();
+										con.close();
+									} catch (SQLException e) {
+										out.println("SQLException caught: " + e.getMessage());
+									}
+								%>
+							
+						</table>
 					</div>
 				</div>
 			</div>
