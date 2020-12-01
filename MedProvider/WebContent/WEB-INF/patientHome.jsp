@@ -32,6 +32,7 @@
 				</div>
 			</div>
 			<div class="middle-body">
+				<div id="btn-container">
 				<div class="body-btns">
 					<button id="make-appoint-btn" onClick="initAppointmentForm()">Make
 						an Appointment</button>
@@ -41,10 +42,14 @@
 				<div class="body-btns">
 					<button id="contact-physician-btn" onClick="initMessageForm()">Contact
 						a Physician</button>
-					<button id="view-prescriptions-btn" onClick="showMessages()">View
+					<button id="view-messages-btn" onClick="showMessages()">View
 						Messages</button>
 				</div>
-
+				<div class="body-btns">
+					<button id="view-prescriptions-btn" onClick="showPrescriptions()">View
+						Prescriptions</button>
+				</div>
+				</div>
 				<div class="form-container">
 					<form id="make-appoint-form" action="appointmentValidation.jsp"
 						method="post" style="display: none">
@@ -67,11 +72,14 @@
 								.getElementById('make-message-form');
 								var msgTableVis = document
 								.getElementById('view_msg_table');
+								var prescTableVis = document
+								.getElementById('view_presc_table');
 								
 								formVis.style.display = "none";
 								appVis.style.display = "none";
 								messagesVis.style.display = "none";
 								msgTableVis.style.display = "none";
+								prescTableVis.style.display = "none";
 								
 								
 							}
@@ -166,6 +174,17 @@
 											formVis.style.display = "none";
 										}
 									}
+									function showPrescriptions() {
+										
+										var formVis = document
+													.getElementById('view_presc_table');
+											if (formVis.style.display === "none") {
+												hideAll();
+												formVis.style.display = "block";
+											} else {
+												formVis.style.display = "none";
+											}
+										}
 									function submitMessage() {
 										var physEmail = document
 												.getElementById('physEmail').value;
@@ -199,10 +218,11 @@
 										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
 										Statement stmt = con.createStatement();
 										ResultSet rs = stmt
-												.executeQuery("select physicianemail_msg, content, date from messages, physician_msg,"
-														+ "(select patients_msg_id from patients_msg where patientsemail_msg = '" + userEmail
+												.executeQuery("SELECT physicianemail_msg, content, date FROM messages, physician_msg,"
+														+ "(SELECT patients_msg_id from patients_msg WHERE patientsemail_msg = '" + userEmail
 														+ "')Temp"
-														+ " where Temp.patients_msg_id = msg_id and Temp.patients_msg_id = physician_msg_id");
+														+ " WHERE Temp.patients_msg_id = msg_id AND Temp.patients_msg_id = physician_msg_id "
+														+ "ORDER BY Temp.patients_msg_id DESC");
 
 										while (rs.next()) {
 								
@@ -243,11 +263,58 @@
 										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
 										Statement stmt = con.createStatement();
 										ResultSet rs = stmt
-												.executeQuery("select physicianemail_app, appointment_date, appointment_time" 
-														+ " from appointment, appointment_physician,"
-														+ "(select patient_app_id from appointment_patient where patientemail_app = '" + userEmail
+												.executeQuery("SELECT physicianemail_app, appointment_date, appointment_time" 
+														+ " FROM appointment, appointment_physician,"
+														+ "(SELECT patient_app_id FROM appointment_patient WHERE patientemail_app = '" + userEmail
 														+ "')Temp"
-														+ " where Temp.patient_app_id = appointment_id and Temp.patient_app_id = physician_app_id");
+														+ " WHERE Temp.patient_app_id = appointment_id AND Temp.patient_app_id = physician_app_id "
+														+ "ORDER BY appointment_date DESC");
+
+										while (rs.next()) {
+								
+											%>
+											
+										<tr>
+											 <td><%=rs.getString(1) %></td>
+											 <td><%=rs.getString(2) %></td>
+											 <td><%=rs.getString(3) %></td>
+										</tr>
+										<%
+										}
+										rs.close();
+										stmt.close();
+										con.close();
+									} catch (SQLException e) {
+										out.println("SQLException caught: " + e.getMessage());
+									}
+								%>
+							
+						</table>
+					</div>
+					<div id="view_presc_table" style="display: none">
+
+						<table class=fixed-table rules="all">
+							<tr>
+								<th>Medication</th>
+								<th>Frequency</th>
+								<th>Dosage</th>
+							</tr>
+							
+								
+								<%
+									try {
+
+										java.sql.Connection con;
+										Class.forName("com.mysql.cj.jdbc.Driver");
+										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
+										Statement stmt = con.createStatement();
+										ResultSet rs = stmt
+												.executeQuery("select med_name, TempHas.frequency, TempHas.dosage " 
+														+ " from medication, (select med_id_has, frequency, dosage "
+														+ "from prescription, has, (select prescriptionid from receives where Emailpatient_receive = '" + userEmail
+														+ "')Temp"
+														+ " where Temp.prescriptionid = prescription_id and Temp.prescriptionid = prescription_id_has)TempHas "
+														+ "where med_id = TempHas.med_id_has");
 
 										while (rs.next()) {
 								

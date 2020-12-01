@@ -70,6 +70,26 @@ body{
 	margin: 0 0;
 }
 
+.logout a {
+	background-color: #cd5c5c;
+	border: none;
+	border-radius: 8px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	font-size: 16px;
+	font-family: 'Source Sans Pro', sans-serif;
+	transition-duration: 0.4s;
+}
+
+.logout a:hover {
+	background-color: white;
+	color: black;
+	border: 2px solid #cd5c5c;
+}
+
 .middle-body {
 	width: 100%;
 	text-align: center;
@@ -130,6 +150,11 @@ textarea
 	margin-right: auto;
 }
 
+#btn-container {
+	width: 100%;
+	margin: auto;
+}
+
 .body-btns button {
 	background-color: #cd5c5c;
 	border: none;
@@ -142,6 +167,7 @@ textarea
 	font-size: 16px;
 	font-family: 'Source Sans Pro', sans-serif;
 	margin-bottom: 20px;
+	width: 250px;
 }
 
 /* Add a hover effect for buttons */
@@ -153,41 +179,18 @@ button:hover {
 	margin-bottom: 18px;
 }
 
-.logout a {
-	background-color: #cd5c5c;
-	border: none;
-	border-radius: 8px;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: block;
-	font-size: 16px;
-	font-family: 'Source Sans Pro', sans-serif;
-	transition-duration: 0.4s;
-}
 
-.logout a:hover {
-	background-color: white;
-	color: black;
-	border: 2px solid #cd5c5c;
-}
 
 .body-btns {
 	margin: 0 auto;
 	padding: 0;
 	list-style: none;
-	display: block;
-	margin-left: 20px;
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
-.body-btns li {
-	padding: 0 8px;
-	line-height: 30px;
-	float: left;
-}
-
-#view__msg_table, #view_app_table {
+#view__msg_table, #view_app_table, #view_presc_table {
 	
 	width: 80%;
 	margin-left: auto;
