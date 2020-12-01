@@ -156,7 +156,7 @@
 								<label for="email"><b>Patient's Email</b></label>
 								<input id="patientEmail" type="text" placeholder="Enter Email" name="email" required> 
 								<label for="medication"><b>Medication</b></label>
- -->								<select name="med-name">
+								<select name="med-name">
 									<%				
 									String db = "medprovider";
 									String user = "root"; // assumes database name is the same as username
@@ -190,7 +190,7 @@
 								<label for="medication"><b>Frequency</b></label>
 								<input id="frequency" type="text" placeholder="Enter Frequency" name="frequency" required> 
 								<label for="medication"><b>Dosage</b></label>
-								<input id="med-name" type="number" placeholder="Enter Dosage" name="med-name" required min="1"> 
+								<input id="med-name" type="number" placeholder="Enter Dosage" name="dosage" required min="1"> 
 								<label for="unit">mL</label>
 								<button id=submit-btn type="submit">Submit</button>
 

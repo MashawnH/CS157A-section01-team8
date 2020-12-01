@@ -16,14 +16,9 @@
 		<img src="images/logo.png" alt="Logo">
 	</div>
 
-	<h1 style="text-align: left">Please choose your type of user:</h1>
-
-
-
-
 	<form id="signUp-form" action="signUpValidation.jsp" method="post">
 
-
+		<h1 style="text-align: left">Please choose your type of user:</h1>
 		<div class="login-body">
 			<div style="text-align: left;">
 				<span class="sortOptions"> 
@@ -33,8 +28,8 @@
 				<br>
 				</span>
 			</div>
-			<label for="username"><b>User Name</b></label> <input type="text"
-				placeholder="Enter User Name" name="username" required> <label
+			<label for="username"><b>Name</b></label> <input type="text"
+				placeholder="Enter Name" name="username" required> <label
 				for="email"><b>Email</b></label> <input type="text"
 				placeholder="Enter Email" name="email" required> <label
 				for="psw"><b>Password</b></label> <input type="password"
@@ -43,6 +38,9 @@
 				
 		</div>
 		<button class="signup" type="submit">Sign Up</button>
+	</form>
+	<form action="loginPage.jsp">
+		<button class="signup" type="submit">Cancel</button>
 	</form>
 
 

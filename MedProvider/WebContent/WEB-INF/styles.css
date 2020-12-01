@@ -204,3 +204,10 @@ button:hover {
 	border: 1px solid black;
 	word-wrap: break-word;
 }
+
+#login:hover {
+	margin-bottom: 0px;
+}
+#signUp-btn {
+	margin-top: 20px;
+}

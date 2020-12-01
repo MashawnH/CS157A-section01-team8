@@ -22,6 +22,7 @@ String password = "Cannucks123!";
 int aUser = -1;
 int aPatient = -1;
 int aPhysician = -1;
+int aAdmin= -1;
 try {
     
     java.sql.Connection con; 
@@ -40,6 +41,10 @@ try {
 	    	email +"'");
 	rs.next();
 	aPhysician = rs.getInt(1);
+	rs = stmt.executeQuery("SELECT COUNT(*) FROM medprovider.administrators WHERE Emailadmin = '" + 
+	    	email +"'");
+	rs.next();
+	aAdmin = rs.getInt(1);
     rs.close();
     stmt.close();
     con.close();
@@ -53,13 +58,14 @@ function isUser(){
 	var userFound = "<%= aUser %>";
 	var patFound = "<%= aPatient %>";
 	var physFound = "<%= aPhysician %>";
+	var adminFound = "<%= aAdmin %>";
 	
 	if(userFound>0){
-		if (patFound>0)
+	 	if (patFound>0)
 			window.location = "patientHome.jsp";
 		else if (physFound>0)
 			window.location = "physicianHome.jsp";
-		else
+		else if (adminFound > 0)
 			window.location = "adminHome.jsp";
 	}
 	else{

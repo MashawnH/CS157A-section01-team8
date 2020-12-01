@@ -37,7 +37,7 @@
 							<button id="login" type="submit">Login</button>
 						</div>
 					</form>
-					<form action="signUpPage.jsp" method="post">
+					<form id="signUp-btn" action="signUpPage.jsp" method="post">
 						<button class="signup" type="submit">Create Account</button>
 					</form>
 				</div>

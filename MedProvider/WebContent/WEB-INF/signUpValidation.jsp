@@ -13,9 +13,10 @@
 </body>
 
 <%
+
 String db = "medprovider";
 String user = "root"; // assumes database name is the same as username
-String password = "toor"; //"Cannucks123!";
+String password = "Cannucks123!";
 int aUser = -1;
 try {
 	java.sql.Connection con;
@@ -48,66 +49,63 @@ function isNotNewEmail() {
 	}
 	else{	
 		var chosen = "<%=type%>";
+		console.log(chosen)
 		
-		<%String name = request.getParameter("username");
-		  String email = request.getParameter("email");
-		  String pass = request.getParameter("psw");
+		<%
+			String name = request.getParameter("username");
+			String email = request.getParameter("email");
+			String pass = request.getParameter("psw");
 
-try {
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
-	Statement st = conn.createStatement();
-
-	int i = st.executeUpdate(
-			"INSERT INTO users(email,password,name)VALUES('" + email + "','" + pass + "','" + name + "')");
-} catch (Exception e) {
-	System.out.print(e);
-	e.printStackTrace();
-}%>
-		
-			if (chosen = 'patient')
-			{
-				console.log('Hello patient');
-				<%Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root",
+						"Cannucks123!");
 				Statement st = conn.createStatement();
-		
-		 		Random r = new Random();
-	     		int number =  r.nextInt((99999 - 10000) + 1) + 10000;
-	     
-				int i = st.executeUpdate("INSERT INTO patients(patient_id,emailpatient)VALUES('PA"+ number + "','" + email + "')");%>
-				window.location = "loginPage.jsp";
-			}
-			else if (chosen = 'physician')
-			{
-					console.log('Hello physician');
-					<%Class.forName("com.mysql.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
-					st = conn.createStatement();
+
+				int i = st.executeUpdate(
+						"INSERT INTO users(email,password,name)VALUES('" + email + "','" + pass + "','" + name + "')");
 			
-			 		r = new Random();
-		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
-		     
-					i = st.executeUpdate("INSERT INTO physicians(physician_id,emailphysician)VALUES('PH"+ number + "','" + email + "')");%>
-					window.location = "loginPage.jsp";
+
+				if (type == "patient") {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root",
+						"Cannucks123!");
+				st = conn.createStatement();
+
+				Random r = new Random();
+				int number = r.nextInt((99999 - 10000) + 1) + 10000;
+
+				i = st.executeUpdate(
+						"INSERT INTO patients(patient_id,emailpatient)VALUES('PA" + number + "','" + email + "')");
+
+			} else if (type == "physician") {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "Cannucks123!");
+				st = conn.createStatement();
+				Random r = new Random();
+				int number = r.nextInt((99999 - 10000) + 1) + 10000;
+
+
+				i = st.executeUpdate("INSERT INTO physicians(physician_id,emailphysician)VALUES('PH" + number + "','"
+						+ email + "')");
+			} else {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "Cannucks123!");
+				st = conn.createStatement();
+				Random r = new Random();
+				int number = r.nextInt((99999 - 10000) + 1) + 10000;
+				i = st.executeUpdate(
+						"INSERT INTO administrators(admin_id,emailadmin)VALUES('AD" + number + "','" + email + "')");
 			}
-			else
-			{
-					console.log('Hello admin');
-					<%Class.forName("com.mysql.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
-					st = conn.createStatement();
-			
-			 		r = new Random();
-		     		number =  r.nextInt((99999 - 10000) + 1) + 10000;
-		     
-					i = st.executeUpdate("INSERT INTO administrators(admin_id,emailadmin)VALUES('AD"+ number + "','" + email + "')");%>
-					window.location = "loginPage.jsp";
+			} catch (Exception e) {
+				System.out.print(e);
+				e.printStackTrace();
 			}
-	}	
-	
-}
-		
+			%>
+	window.location = "loginPage.jsp";
+		}
+
+	}
 </script>
 
 

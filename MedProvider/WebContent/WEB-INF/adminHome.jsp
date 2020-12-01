@@ -32,68 +32,50 @@
 			</div>
 			<div class="middle-body">
 				<div class="body-btns">
-					<button id="modify-medication-btn" onClick="initModifyForm()">Modify
+					<button id="add-medication-btn" onClick="initAddForm()">Add
 						a Medication</button>
-					<button id="view-modify-btn" onClick="showModify()">View
-						Your Modifications</button>
 				</div>
 				<div class="body-btns">
 					<button id="add-physician-btn" onClick="initAddPhysiciansForm()">Add
 						a Physician</button>
-					<button id="view-physicians-btn" onClick="showPhysicians()">View
-						Physicians</button>
 				</div>
 			
 			<div class="form-container">
-					<form id="modify-medication-form" action="modifyValidation.jsp"
+					<form id="add-medication-form" action="addMedValidation.jsp"
 						method="post" style="display: none">
-						<div class="modify-medication-body">
-							<label for="email"><b>Modify Medications</b></label> <input
+						<div class="add-medication-body">
+							<label for="email"><b>Medication Name</b></label> <input
 								id="adminEmail" type="text" placeholder="Enter Medication"
-								name="medication" required> <label for="modify-date"><b>Date&Time</b></label>
-							<input id="datePicker" type="date" name="modify_date" required>
-							<input id="timePicker" type="time" name="modify_time" min="8:00"
-								max="18:00" step="60" required>
+								name="medication" required>
 							<button id=submit-btn type="submit">Submit</button>
 
 							<script type="text/javascript">
 							function hideAll() {
 								var formVis = document
-								.getElementById('modify-medication-form');
-								var modVis = document
-								.getElementById('view_modify_table');
+								.getElementById('add-medication-form');
 								var physiciansVis = document
 								.getElementById('add-physician-form');
 								var physTableVis = document
 								.getElementById('view_phys_table');
 								
 								formVis.style.display = "none";
-								modVis.style.display = "none";
 								physiciansVis.style.display = "none";
 								physTableVis.style.display = "none";
 								
 								
 							}
-								function initModifyForm() {
+								function initAddForm() {
 								
 									var formVis = document
-											.getElementById('modify-medication-form');
+											.getElementById('add-medication-form');
 									if (formVis.style.display === "none") {
 										hideAll();
 										formVis.style.display = "block";
-										var today = new Date();
-										var year = today.getFullYear();
-										var month = String(today.getMonth() + 1)
-												.padStart(2, '0');
-										var day = String(today.getDate())
-												.padStart(2, '0');
-										document.getElementById('datePicker').min = year
-												+ "-" + month + "-" + day;
 									} else {
 										formVis.style.display = "none";
 									}
 								}
-								function submitModify() {
+								function submitAdd() {
 									var adminEmail = document
 											.getElementById('adminEmail').value;
 									var date = document
@@ -112,11 +94,12 @@
 					<div class="form-container">
 						<form id="add-physician-form" action="addPhysicianValidation.jsp" method="post" style="display: none">
 							<div class="add-physician-form">
+								<label for="name"><b>Physician's Name</b></label>
+								<input id="physName" type="text" placeholder="Enter name" name="name" required> 
 								<label for="email"><b>Physician's Email</b></label>
-								<input id="adminEmail" type="text" placeholder="Enter Email" name="email" required> 
-								<label for="add"><b>Add</b></label>
-								<textarea id="addphysician" rows="10" cols="60"
-									placeholder="Enter Message" name="add" required></textarea>
+								<input id="physEmail" type="text" placeholder="Enter Email" name="email" required> 
+								<label for="psw"><b>Password</b></label>
+								<input type="password" placeholder="Enter Password" name="psw" required>
 								<button id=submit-btn type="submit">Submit</button>
 
 								<script type="text/javascript">
