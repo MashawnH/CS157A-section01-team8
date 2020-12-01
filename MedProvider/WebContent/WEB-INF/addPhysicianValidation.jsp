@@ -60,6 +60,9 @@
 					int number = r.nextInt((99999 - 10000) + 1) + 10000;
 					i = stmt.executeUpdate("INSERT INTO physicians(physician_id,emailphysician)VALUES('PH" + number + "','"
 							+ physEmail + "')");
+					
+					i = stmt.executeUpdate(
+							"INSERT INTO addphysician VALUES('" + userEmail +"','" + physEmail + "')");
 				    stmt.close();
 				    con.close();
 				} catch(SQLException e) { 
