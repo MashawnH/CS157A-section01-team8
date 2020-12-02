@@ -40,8 +40,10 @@ try {
 <%String type = request.getParameter("radAnswer");%>
 
 
+
 function isNotNewEmail() {
 	var emailfound = "<%=aUser%>";
+	
 	if(emailfound > 0)
 	{
 			alert("Cannot create new account with this email");
@@ -49,13 +51,14 @@ function isNotNewEmail() {
 	}
 	else{	
 		var chosen = "<%=type%>";
-		console.log(chosen)
+		console.log(chosen);
 		
 		<%
 			String name = request.getParameter("username");
 			String email = request.getParameter("email");
 			String pass = request.getParameter("psw");
 
+			System.out.println(type);
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root",
@@ -66,7 +69,7 @@ function isNotNewEmail() {
 						"INSERT INTO users(email,password,name)VALUES('" + email + "','" + pass + "','" + name + "')");
 			
 
-				if (type == "patient") {
+				if (type.equals("patient")) {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root",
 						"Cannucks123!");
@@ -78,7 +81,7 @@ function isNotNewEmail() {
 				i = st.executeUpdate(
 						"INSERT INTO patients(patient_id,emailpatient)VALUES('PA" + number + "','" + email + "')");
 
-			} else if (type == "physician") {
+			} else if (type.equals("physician")) {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "Cannucks123!");
 				st = conn.createStatement();
@@ -102,6 +105,7 @@ function isNotNewEmail() {
 				e.printStackTrace();
 			}
 			%>
+	alert("User Created");
 	window.location = "loginPage.jsp";
 		}
 

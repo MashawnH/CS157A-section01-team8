@@ -44,26 +44,5 @@
 	</form>
 
 
-
-
-
-
-
-	<%-- Sample code to retrieve all information from users table 
-	<%
-	try {
-		java.sql.Connection con;
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider", "root", "toor");
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from users");
-		while (rs.next())
-			out.println("<br>" + rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
-		con.close();
-	} catch (SQLException e) {
-		out.println("SQLException caught: " + e.getMessage());
-	}
-	%>
-	--%>
 </body>
 </html>
