@@ -39,7 +39,15 @@
 					<button id="add-physician-btn" onClick="initAddPhysiciansForm()">Add
 						a Physician</button>
 				</div>
-			
+				<div class="body-btns">
+					<button id="view-appoint-btn" onClick="showAppointments()">View
+							All Appointments</button>
+						
+				</div>
+				<div class="body-btns">
+					<button id="view-prescriptions-btn" onClick="showPrescriptions()">View
+							Prescriptions</button>
+				</div>
 			<div class="form-container">
 					<form id="add-medication-form" action="addMedValidation.jsp"
 						method="post" style="display: none">
@@ -55,15 +63,41 @@
 								.getElementById('add-medication-form');
 								var physiciansVis = document
 								.getElementById('add-physician-form');
-								var physTableVis = document
-								.getElementById('view_phys_table');
+								var appVis = document
+								.getElementById('view_app_table');
+								var prescVis = document
+								.getElementById('view_presc_table');
 								
 								formVis.style.display = "none";
 								physiciansVis.style.display = "none";
-								physTableVis.style.display = "none";
-								
+								appVis.style.display = "none";
+								prescVis.style.display = "none";
 								
 							}
+							
+							function showAppointments() {
+								
+								var formVis = document
+											.getElementById('view_app_table');
+									if (formVis.style.display === "none") {
+										hideAll();
+										formVis.style.display = "block";
+									} else {
+										formVis.style.display = "none";
+									}
+								}
+							function showPrescriptions() {
+								
+								var formVis = document
+											.getElementById('view_presc_table');
+									if (formVis.style.display === "none") {
+										hideAll();
+										formVis.style.display = "block";
+									} else {
+										formVis.style.display = "none";
+									}
+								}
+							
 								function initAddForm() {
 								
 									var formVis = document
@@ -155,13 +189,14 @@
 							</div>
 						</form>
 					</div>
-					<div id="view_phys_table" style="display: none">
+					<div id="view_app_table" style="display: none">
 
 						<table class=fixed-table rules="all">
 							<tr>
-								<th>Admin Email</th>
-								<th>Message</th>
+								<th>Patient Email</th>
+								<th>Physician Email</th>
 								<th>Date</th>
+								<th>Time</th>
 							</tr>
 							
 								
@@ -170,17 +205,15 @@
 									String db = "medprovider";
 									String user = "root"; // assumes database name is the same as username
 									String password = "Cannucks123!";
-									String test = "nothing changed";
 									try {
 										java.sql.Connection con;
 										Class.forName("com.mysql.cj.jdbc.Driver");
 										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
 										Statement stmt = con.createStatement();
 										ResultSet rs = stmt
-												.executeQuery("select physicianemail_msg, content, date from messages, physician_msg,"
-														+ "(select patients_msg_id from patients_msg where patientsemail_msg = '" + userEmail
-														+ "')Temp"
-														+ " where Temp.patients_msg_id = msg_id and Temp.patients_msg_id = physician_msg_id");
+												.executeQuery("select patientemail_app, physicianemail_app, appointment_date, appointment_time "
+														+ " from appointment_patient join appointment on (appointment_id = patient_app_id) "
+														+ " join appointment_physician on(appointment_id = physician_app_id)");
 										while (rs.next()) {
 								
 											%>
@@ -189,6 +222,7 @@
 											 <td><%=rs.getString(1) %></td>
 											 <td><%=rs.getString(2) %></td>
 											 <td><%=rs.getString(3) %></td>
+											 <td><%=rs.getString(4) %></td>
 										</tr>
 										<%
 										}
@@ -202,28 +236,23 @@
 							
 						</table>
 					</div>
-					<div id="view_modify_table" style="display: none">
+					<div id="view_presc_table" style="display: none">
 
 						<table class=fixed-table rules="all">
 							<tr>
-								<th>Admin Email</th>
-								<th>Date</th>
-								<th>Time</th>
-							</tr>
-							
-								
+								<th>Physician's Email</th>
+								<th>Medication</th>
+							</tr>		
 								<%
 									try {
+
 										java.sql.Connection con;
 										Class.forName("com.mysql.cj.jdbc.Driver");
 										con = DriverManager.getConnection("jdbc:mysql://localhost:3306/medprovider?serverTimezone=EST5EDT", user, password);
 										Statement stmt = con.createStatement();
 										ResultSet rs = stmt
-												.executeQuery("select physicianemail_app, appointment_date, appointment_time" 
-														+ " from appointment, appointment_physician,"
-														+ "(select patient_app_id from appointment_patient where patientemail_app = '" + userEmail
-														+ "')Temp"
-														+ " where Temp.patient_app_id = appointment_id and Temp.patient_app_id = physician_app_id");
+												.executeQuery("select Emailphysician, med_name from has join medication on (med_id_has = med_id) join prescribes on (prescription_id_has = prescriptionid)" );
+
 										while (rs.next()) {
 								
 											%>
@@ -231,7 +260,6 @@
 										<tr>
 											 <td><%=rs.getString(1) %></td>
 											 <td><%=rs.getString(2) %></td>
-											 <td><%=rs.getString(3) %></td>
 										</tr>
 										<%
 										}

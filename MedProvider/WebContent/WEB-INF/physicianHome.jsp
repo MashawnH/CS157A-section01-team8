@@ -34,6 +34,8 @@
 			<div class="middle-body">
 				<div id="btn-container">
 				<div class="body-btns">
+					<button id="phys-make-appoint-btn" onClick="initAppointmentForm()">Make
+						an Appointment</button>
 					<button id="view-appoint-btn" onClick="showAppointments()">View
 						Your Appointments</button>
 				</div>
@@ -49,10 +51,10 @@
 				</div>
 				</div>
 				<div class="form-container">
-					<form id="make-appoint-form" action="appointmentValidation.jsp"
+					<form id="make-appoint-form" action="physAppointmentValidation.jsp"
 						method="post" style="display: none">
 						<div class="make-appoint-body">
-							<label for="email"><b>Physician's Email</b></label> <input
+							<label for="email"><b>Patient's Email</b></label> <input
 								id="physEmail" type="text" placeholder="Enter Email"
 								name="email" required> <label for="appoint-date"><b>Date&Time</b></label>
 							<input id="datePicker" type="date" name="appoint_date" required>
@@ -80,6 +82,27 @@
 								prescFormVis.style.display = "none";
 								
 								
+							}
+							
+							function initAppointmentForm() {
+								
+								var formVis = document
+										.getElementById('make-appoint-form');
+								if (formVis.style.display === "none") {
+									hideAll();
+									formVis.style.display = "block";
+									var today = new Date();
+									var year = today.getFullYear();
+									var month = String(today.getMonth() + 1)
+											.padStart(2, '0');
+									var day = String(today.getDate())
+											.padStart(2, '0');
+									document.getElementById('datePicker').min = year
+											+ "-" + month + "-" + day;
+								} else {
+									formVis.style.display = "none";
+								}
+
 							}
 							</script>
 						</div>
